@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\RecettesRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController {
 
@@ -11,10 +13,15 @@ class HomeController extends AbstractController {
 
     /**
      * @Route ("/", name= "home")
+     * @param RecettesRepository $repository
+     * @return Response
      */
-    public function index () 
+    public function index (RecettesRepository $repository) : Response
     {
-        return $this->render("pages/home.html.twig");
+        $recettes = $repository->findLatest();
+        return $this->render("pages/home.html.twig" , [
+                    "recettes" => $recettes
+        ]);
     }
 
 }

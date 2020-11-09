@@ -1,3 +1,44 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title "Site carrefour" %}
+{% block title "Homepage" %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+
+        <h1 class="font-italic">Recettes</h1>
+
+        <p>
+            Lorem ipsum
+        </p>
+    </div>
+
+    <div class="container">
+
+        <h2 class="text-center m-5">Nos dernières recettes</h2>
+
+        <div class="row flex">
+
+            {% for recette in recettes %}
+
+                <div class="col-3">
+
+                    <div class="card">
+                        <div class="card-body bg-light">
+                            <h3 class="card-title">
+                                <a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-success font-italic">{{ recette.title }}</a>
+                            </h3>
+                            <p class="card-text">{{ recette.description }}</p>
+                            <div class="text-primary">{{ recette.time }}</div>
+                            <div class="text-info"></em>{{ recette.personnes }} personnes</em></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+{% endblock %}
