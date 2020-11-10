@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Ajout d'une recette 
+{% endblock %}
+
+{{ include ('admin/recettes/_form.html.twig', {form: form, button: 'Créer' }) }}
