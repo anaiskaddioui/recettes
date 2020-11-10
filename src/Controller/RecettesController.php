@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Recettes;
 use App\Repository\RecettesRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
