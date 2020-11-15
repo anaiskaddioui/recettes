@@ -7,6 +7,7 @@ use App\Form\RecettesType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\RecettesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,7 +58,8 @@ class AdminRecettesController extends AbstractController {
         {
             $this->em->persist($recette);
             $this->em->flush();
-            return $this->redirectToRoute('admin.recettes.index', [], 301);
+            $this->addFlash('success', 'Recette ajoutée avec succès');
+            return $this->redirectToRoute("admin.recettes.index", [], 301);
         }
 
         return $this->render("admin/recettes/new.html.twig", [
@@ -67,7 +69,7 @@ class AdminRecettesController extends AbstractController {
     }
 
     /**
-     * @Route("/admin/recettes/{id}", name="admin.recettes.edit")
+     * @Route("/admin/recettes/{id}", name="admin.recettes.edit", methods="GET|POST")
      * @param Recettes $recette
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -80,6 +82,7 @@ class AdminRecettesController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid())
         {
             $this->em->flush();
+            $this->addFlash('success', 'Recette modifiée avec succès');
             return $this->redirectToRoute('admin.recettes.index');
         }
 
@@ -87,6 +90,24 @@ class AdminRecettesController extends AbstractController {
             "recette" => $recette,
             "form" => $form->createView()    
         ]);
+    }
+
+    /**
+     * @Route("/admin/recettes/{id}", name="admin.recettes.delete", methods="DELETE")
+     * @param Recettes $recette
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete (Recettes $recette, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete' . $recette->getId(), $request->get('_token')))
+        {
+            $this->em->remove($recette);
+            $this->em->flush();
+            $this->addFlash('success', 'Recette supprimée avec succès');
+        }
+        
+        return $this->redirectToRoute("admin.recettes.index", [], 301);
     }
 }
 

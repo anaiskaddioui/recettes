@@ -6,8 +6,7 @@ use App\Entity\Recettes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Response;
-use Cocur\Slugify\Slugify;
+
 
 /**
  * @method Recettes|null find($id, $lockMode = null, $lockVersion = null)

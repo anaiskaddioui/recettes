@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Cocur\Slugify\Slugify;
+
 
 class RecettesController extends AbstractController {
     
@@ -42,7 +42,7 @@ class RecettesController extends AbstractController {
     }
 
     /**
-     * @Route ("/recettes/{slug} - {id}", name="recettes.show", requirements = {"slug":"[a-z0-9\-]*"})
+     * @Route ("/recettes/{slug}-{id}", name="recettes.show", requirements={"slug":"[a-z0-9\-]*"})
      * @return Response
      */
     public function show(Recettes $recette, string $slug) : Response

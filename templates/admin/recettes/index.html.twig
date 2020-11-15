@@ -19,10 +19,25 @@
             </thead>
 
             <tbody>
+
+            {% for message in app.flashes('success') %}
+
+                <div class="alert alert-success">{{ message }}</div>
+
+            {% endfor %}
+    
             {% for recette in recettes %}
                 <tr>
                     <td>{{ recette.title }}</td>
-                    <td><a href="{{ path('admin.recettes.edit', {id:recette.id}) }}" class="btn btn-secondary">Editer</a></td>
+                    <td>
+                        <a href="{{ path('admin.recettes.edit', {id:recette.id}) }}" class="btn btn-secondary">Editer</a>
+                        <form method="post" action="{{ path('admin.recettes.delete', {id: recette.id}) }}" style="display: inline-block;" onsubmit="return confirm('Etes-vous sûr(e) de vouloir supprimer la recette ?')">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recette.id) }}">
+                            <button class="btn btn-danger" style="margin-left: 90%;">Supprimer</button>
+                        </form>
+
+                    </td>
                 </tr>
 
             {% endfor %}
