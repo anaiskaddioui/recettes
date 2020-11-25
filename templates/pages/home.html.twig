@@ -3,7 +3,7 @@
 {% block title "Homepage" %}
 
 {% block body %}
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center" style="background: #F3EBE0;">
 
         <h1 class="font-italic">Recettes</h1>
 
@@ -12,7 +12,7 @@
         </p>
     </div>
 
-    <div class="container">
+    <div class="container" style="background: #F3EBE0;">
 
         <h2 class="text-center m-5">Nos dernières recettes</h2>
 
@@ -27,20 +27,23 @@
                             <h3 class="card-title">
                                 <a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-success font-italic">{{ recette.title }}</a>
                             </h3>
+                            <div class="font-italic mb-3"></em>({{ recette.type.nom }})</em></div>
                             <p class="card-text">{{ recette.description }}</p>
-                            <div class="text-primary">{{ recette.time }}</div>
-                            <div class="text-info"></em>{{ recette.personnes }} personnes</em></div>
+                            <div class="text-primary font-italic">{{ recette.time }}</div>
+                            <div class="text-info font-italic"></em>{{ recette.personnes }} personnes</em></div>
                         </div>
+
+
+
+                        <div class="my-2 text-center">
+                            <button class="btn btn-info"><a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-white font-italic">Voir la recette</a></button>
+                        </div>    
                     </div>
 
                 </div>
 
             {% endfor %}
 
-        </div>
-
-        <div class="text-right my-5 py-5">
-            <a class="btn btn-primary" href="{{ path('admin.recettes.new') }}">Ajouter une recette</a>
         </div>
 
     </div>

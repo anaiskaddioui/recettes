@@ -25,6 +25,10 @@
                 <div class="alert alert-success">{{ message }}</div>
 
             {% endfor %}
+
+            <div class="text-right my-5 py-5">
+                <a class="btn btn-primary" href="{{ path('admin.recettes.new') }}">Ajouter une recette</a>
+            </div>
     
             {% for recette in recettes %}
                 <tr>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recettes;
+use App\Entity\User;
 use App\Repository\RecettesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +48,15 @@ class RecettesController extends AbstractController {
      */
     public function show(Recettes $recette, string $slug) : Response
     {
+        $userName = $recette->getAuteur();
+
+        if ($userName) {
+            $userName = $userName->getUsername();
+        }else {
+            $userName = "Inconnu";
+        }
+
+
         if ($recette->getSlug() !== $slug)
         {
             return $this->redirectToRoute("recettes.show", [
@@ -56,7 +66,9 @@ class RecettesController extends AbstractController {
         }
         return $this->render("recettes/show.html.twig", [
             "recette" => $recette,
-            "current_menu" => "recettes"
+            "current_menu" => "recettes",
+            "user" => $userName
+        
         ]);
     }
 

@@ -38,7 +38,7 @@ class RecettesRepository extends ServiceEntityRepository
     public function findLatest() : array
     {
         return $this->findAllQuery() //Utilisation de la fonction privée au dessus  
-                    ->setMaxResults(4)
+                    ->setMaxResults(20)
                     ->getQuery()
                     ->getResult();
     }
