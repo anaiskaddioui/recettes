@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title "Contact" %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1 class="text-center mt-5" style="background: rgba(243,235,224,0.6); border-radius: 5px; width: 70%; margin: auto;">Nous contacter</h1>
+
+        <div class="row my-5" style="background: rgba(243,235,224,0.6); border-radius: 5px; width: 70%; margin: auto;">
+        
+            <div class="col">
+            
+                {{ form_start(formContact) }}
+                {{ form_rest(formContact) }}
+                {{ form_end(formContact) }}
+
+                <input type="submit" class="btn btn-success" value="Envoyer" style="margin: 2% auto; display: flex; justify-content: center;">
+
+            </div>
+
+        </div>
+
+    <div>
+
+{% endblock %}

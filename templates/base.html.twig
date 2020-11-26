@@ -28,7 +28,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="" style="color: whitesmoke;">Nous contacter</a>
+                        <a class="nav-link" href="{{ path('pages_contact') }}" style="color: whitesmoke;">Nous contacter</a>
                     </li>
 
                     {% if is_granted('ROLE_ADMIN', app.user) %}
@@ -47,6 +47,7 @@
                 </ul>    
             </div>
         </nav>
+
         {% block body %}
     
         {% block javascripts %}{% endblock %}

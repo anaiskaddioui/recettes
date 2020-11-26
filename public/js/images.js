@@ -15,7 +15,7 @@ window.onload = () => {
 
             if (confirm('Voulez-vous supprimer cette image ?'))
             {
-                //On envoie une requ^te ajax vers le href du lien avec méthode DELETE
+                //On envoie une requête ajax vers le href du lien avec méthode DELETE
 
                 fetch(this.getAttribute("href"), {
                     method : "DELETE", 
