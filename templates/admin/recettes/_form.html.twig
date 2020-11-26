@@ -1,9 +1,26 @@
 {% block body %}
-<div class="container m-auto">
+<div class="container m-auto" style="background: rgba(243,235,224,0.6);">
 
     {{ form_start(form) }}
     <form class="form form-group p-5">
         {{form_widget(form)}}
+
+        {% if app.request.attributes.get('_route') == 'admin.recettes.edit' %}
+
+            <h2>Images</h2>
+
+            {% for image in recette.images %}
+
+                <div class="my-3">
+                    <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image de la recette" width="150" style="border-radius: 5px;">
+
+                    <a href="{{ path('recettes_delete_image', { id: image.id }) }}" class="bg-danger text-white" style="border-radius: 3px; padding: 2px;" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}" >Supprimer l'image</a>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
     <button class="btn btn-primary m-5">{{ button|default('Enregistrer') }}</button>    
     {{ form_end(form) }}
     </form>

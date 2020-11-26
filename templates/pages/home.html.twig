@@ -3,49 +3,62 @@
 {% block title "Homepage" %}
 
 {% block body %}
-    <div class="jumbotron text-center" style="background: #F3EBE0;">
 
-        <h1 class="font-italic">Recettes</h1>
+      
+        <header class="mt-5 mb-3 text-center" style="background: transparent;">
 
-        <p>
-            Lorem ipsum
-        </p>
-    </div>
+            <h1 class="font-italic" style="background: rgba(243,235,224,0.6);">Recettes</h1>
 
-    <div class="container" style="background: #F3EBE0;">
+            <p>
+                Lorem ipsum
+            </p>
+        </header>
 
-        <h2 class="text-center m-5">Nos dernières recettes</h2>
+        <div class="container">
 
-        <div class="row flex">
+            <div class="row flex mt-5">
 
-            {% for recette in recettes %}
+                {% for recette in recettes %}
 
-                <div class="col-3">
+                    <div class="col-3">
 
-                    <div class="card">
-                        <div class="card-body bg-light">
-                            <h3 class="card-title">
-                                <a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-success font-italic">{{ recette.title }}</a>
-                            </h3>
-                            <div class="font-italic mb-3"></em>({{ recette.type.nom }})</em></div>
-                            <p class="card-text">{{ recette.description }}</p>
-                            <div class="text-primary font-italic">{{ recette.time }}</div>
-                            <div class="text-info font-italic"></em>{{ recette.personnes }} personnes</em></div>
+                        <div class="card">
+                            <div class="card-body bg-light">
+                                <h3 class="card-title text-center">
+                                    <a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-success font-italic">{{ recette.title }}</a>
+                                </h3>
+                                
+                                <div class="font-italic mb-3"><em>({{ recette.type.nom }})</em></div>
+
+                                <div>
+                                    {% for image in recette.images %}
+
+                                        <div class="my-3">
+                                            <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image de la recette" width="200" style="border-radius: 5px;">
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+
+                                <p class="card-text">{{ recette.description }}</p>
+                                <div class="text-primary font-italic">{{ recette.time }}</div>
+                                <div class="text-info font-italic"></em>{{ recette.personnes }} personnes</em></div>
+                            </div>
+
+
+
+                            <div class="my-2 text-center">
+                                <button class="btn btn-info"><a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-white font-italic">Voir la recette</a></button>
+                            </div>    
                         </div>
 
-
-
-                        <div class="my-2 text-center">
-                            <button class="btn btn-info"><a href="{{ path('recettes.show', {id: recette.id, slug:recette.slug}) }}" class="text-white font-italic">Voir la recette</a></button>
-                        </div>    
                     </div>
 
-                </div>
+                {% endfor %}
 
-            {% endfor %}
+            </div>
 
         </div>
 
-    </div>
 
 {% endblock %}

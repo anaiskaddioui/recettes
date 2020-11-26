@@ -9,11 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\RecettesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Symfony\Component\Validator\Constraints\Json;
 
 class AdminRecettesController extends AbstractController {
 
@@ -98,6 +98,22 @@ class AdminRecettesController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            $images = $form->get('images')->getData();
+
+            foreach ($images as $image)
+            {
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                $img = new Images();
+                $img->setName($fichier);
+                $recette->addImage($img);
+            }
+
             $this->em->flush();
             $this->addFlash('success', 'Recette modifiée avec succès');
             return $this->redirectToRoute('admin.recettes.index');
@@ -125,6 +141,28 @@ class AdminRecettesController extends AbstractController {
         }
         
         return $this->redirectToRoute("admin.recettes.index", [], 301);
+    }
+
+    /**
+     * @Route("supprime/image/{id}", name="recettes_delete_image", methods={"DELETE"})
+     */
+    public function delete_image(Images $image, Request $request) 
+    {
+        $data = json_decode($request->getContent(), true);
+        
+        if ($this->isCsrfTokenValid('delete' . $image->getId(), $data['_token']))
+        {
+            $nom = $image->getName();
+            unlink($this->getParameter('image_directory') . '/' . $nom);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            return new JsonResponse(['success' => 1]);
+        } else {
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
     }
 }
 

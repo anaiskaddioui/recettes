@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Recettes;
 use App\Entity\User;
 use App\Repository\RecettesRepository;
@@ -67,8 +68,8 @@ class RecettesController extends AbstractController {
         return $this->render("recettes/show.html.twig", [
             "recette" => $recette,
             "current_menu" => "recettes",
-            "user" => $userName
-        
+            "user" => $userName,
+            "images" => $recette->getImages()
         ]);
     }
 

@@ -6,9 +6,9 @@
 
 {% block body %}
 
-<div class="container mt-4">
+<div class="container mt-4" style="background: rgba(243,235,224,0.8); border-radius: 5px;">
 
-    <div class="text-center m-5 jumbotron">
+    <div class="text-center m-5">
         <h1 class="text-success font-italic">{{ recette.title }}</h1>
         <p><em>{{ recette.description }}</em></p>
     </div>
@@ -23,7 +23,6 @@
             <p><em>{{ recette.time }}</em></p>
             <p>{{ recette.personnes }} personnes</p>            
         </div>
-
     
       <div class="font-italic mb-3"></em>Recette proposée par {{ user }}</em></div>
 
