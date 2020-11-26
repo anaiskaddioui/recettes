@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form method="post" style="background: rgba(243,235,224,0.6); border-radius: 5px; padding-top: 1%; width: 50%; margin: 5% auto;">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -14,7 +14,7 @@
         </div>
     {% endif %}
 
-    <div class="m-auto w-50">
+    <div class="m-auto w-50" >
         <h1 class="h3 mb-3 font-weight-normal text-center my-5">Connexion</h1>
         <label for="inputUsername">Nom d'utilisateur</label>
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>

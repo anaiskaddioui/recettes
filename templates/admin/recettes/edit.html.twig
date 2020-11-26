@@ -6,12 +6,20 @@
 
 {% block body %}
 
-{{ include ('admin/recettes/_form.html.twig', {form: form, button: 'Sauvegarder' }) }}
+<div class="my-5">
+
+  {{ include ('admin/recettes/_form.html.twig', {form: form, button: 'Sauvegarder' }) }}
+  
+</div>
 
 {% endblock %}
 
 {% block javascripts %}
 
-    <script src="{{ asset('js/images.js') }}"></script>
+    <script src="{{ asset('js/images.js') }}">
+    
+        
+    
+    </script>
 
 {% endblock %}

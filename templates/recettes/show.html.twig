@@ -6,16 +6,16 @@
 
 {% block body %}
 
-<div class="container mt-4" style="background: rgba(243,235,224,0.8); border-radius: 5px;">
+<div class="container mt-4" style="border: border-box;">
 
-    <div class="text-center m-5">
-        <h1 class="text-success font-italic">{{ recette.title }}</h1>
+    <div class="text-center m-5" style="background: rgba(243,235,224,0.8); border-radius: 5px; margin: 15% auto; padding: 2%;">
+        <h1 class="text-success font-italic text-center">{{ recette.title }}</h1>
         <p><em>{{ recette.description }}</em></p>
     </div>
 
     <hr class="my-5">
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-5" style="background: rgba(243,235,224,0.8); border-radius: 5px; margin: 15% auto; width: 90%; padding: 2%;">
         <div class="col-6">
             <p>{{ recette.preparation|nl2br }}</p>
         </div>
